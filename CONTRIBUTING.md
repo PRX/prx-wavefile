@@ -23,7 +23,7 @@ example:
 ### Files from the web
 If you add a file that is publicly available on the web, the file should keep the same name from where it was originally available and be included in *test/files/ORIGINS.md*.
 
-Publicaly available files that have been modified for test purposes should follow this naming convention:  
+Publicly available files that have been modified for test purposes should follow this naming convention:
 originalNameOfTheFile-fileSpecificData.wav
 
 Where *fileSpecificData* may appear many times, one for each characteristic of the file that is considered relevant. The original file should also be present and listed in *test/files/ORIGINS.md*.
