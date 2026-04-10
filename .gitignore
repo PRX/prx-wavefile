@@ -1,3 +1,4 @@
+# Local development system files
 *.DS_Store
 
 # Development folders
@@ -7,6 +8,7 @@ node_modules
 # Development files
 *.log
 *.reapeaks
+.tool-versions
 
 # GitHub do not allow big files
 test/large-files
