@@ -26,8 +26,6 @@ if (findArg('--umd')) {
 // Source
 } else {
 	console.log('Source tests');
-	require = require("esm")(module);
-	global.module = module;
 	wavefile = require('../index.js').WaveFile;
 }
 

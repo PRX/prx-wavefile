@@ -2,7 +2,7 @@
 /*
  * Copyright (c) 2018 Rafael da Silva Rocha.
  */
-exports.__esModule = true;
+Object.defineProperty(exports, "__esModule", { value: true });
 /**
  * @fileoverview TypeScript declaration tests.
  * @see https://github.com/rochars/wavefile
