@@ -89,16 +89,16 @@
     "coverage": "c8 report --reporter=lcov"
   },
   "devDependencies": {
-    "@ampproject/rollup-plugin-closure-compiler": "^0.27.0",
-    "@rollup/plugin-commonjs": "^11.0.0",
-    "@rollup/plugin-node-resolve": "^6.0.0",
+    "@rollup/plugin-commonjs": "^29.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "@rollup/plugin-terser": "^1.0.0",
     "byte-data": "^19.0.1",
     "c8": "^11.0.0",
     "docdash": "^1.1.1",
     "jsdoc": "^3.6.3",
     "jshint": "^2.10.3",
     "mocha": "^11.0.0",
-    "rollup": "^1.27.14",
+    "rollup": "^4.0.0",
     "typescript": "^5.0.0"
   },
   "dependencies": {}
