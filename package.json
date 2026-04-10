@@ -54,16 +54,12 @@
   "directories": {
     "bin": "bin",
     "dist": "dist",
-    "externs": "externs",
-    "lib": "lib",
-    "scripts": "scripts"
+    "lib": "lib"
   },
   "files": [
     "bin",
     "dist",
-    "externs",
     "lib",
-    "scripts",
     "index.js",
     "index.d.ts",
     "LICENSE",
@@ -72,7 +68,7 @@
     "CHANGELOG.md"
   ],
   "scripts": {
-    "lint": "jshint index.js bin externs lib test/src",
+    "lint": "jshint index.js bin lib test/src",
     "test": "c8 mocha test/resampler test/dist test/src test/wavefile-parser test/lib --recursive -R dot --timeout=1600000",
     "test-sr": "mocha test/resampler-full -R dot --timeout=1600000",
     "test-sr-point": "mocha test/resampler-full/point.js -R dot --timeout=1600000",
