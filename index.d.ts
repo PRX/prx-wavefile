@@ -5,7 +5,7 @@
 
 export = wavefile;
 
-declare module wavefile {
+declare namespace wavefile {
   class WaveFile {
     /**
      * The bit depth code according to the samples.
