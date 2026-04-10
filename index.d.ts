@@ -35,45 +35,37 @@ declare namespace wavefile {
     fmt: WaveFileFmtChunk;
     /**
      * The data of the 'fact' chunk.
-     * @type {!Object<string, *>}
      */
-    fact: object;
+    fact: WaveFileFactChunk;
     /**
      * The data of the 'cue ' chunk.
-     * @type {!Object<string, *>}
      */
-    cue: object;
+    cue: WaveFileCueChunk;
     /**
      * The data of the 'smpl' chunk.
-     * @type {!Object<string, *>}
      */
-    smpl: object;
+    smpl: WaveFileSmplChunk;
     /**
      * The data of the 'bext' chunk.
-     * @type {!Object<string, *>}
      */
-    bext: object;
+    bext: WaveFileBextChunk;
     /**
      * The data of the 'mext' chunk.
-     * @type {!Object<string, *>}
      */
-    mext: object;
+    mext: WaveFileMextChunk;
     /**
      * The data of the 'cart' chunk.
-     * @type {!Object<string, *>}
      */
-    cart: object;
+    cart: WaveFileCartChunk;
     /**
      * The data of the 'iXML' chunk.
-     * @type {!Object<string, *>}
      */
-    iXML: object;
+    iXML: WaveFileIXMLChunk;
     /**
      * The data of the 'ds64' chunk.
      * Used only with RF64 files.
-     * @type {!Object<string, *>}
      */
-    ds64: object;
+    ds64: WaveFileDs64Chunk;
     /**
      * The data of the 'data' chunk.
      * @type {!Object<string, *>}
@@ -90,17 +82,17 @@ declare namespace wavefile {
      *   }
      * @type {!Array<!Object>}
      */
-    LIST: object[];
+    LIST: WaveFileLISTChunk[];
     /**
      * The data of the 'junk' chunk.
      * @type {!Object<string, *>}
      */
-    junk: object;
+    junk: WaveFileJunkChunk;
     /**
      * The data of the '_PMX' chunk.
      * @type {!Object<string, *>}
      */
-    _PMX: object;
+    _PMX: WaveFilePMXChunk;
     /**
      * Whether to apply a pad byte or not
      * Defaults to 'true'
@@ -392,41 +384,177 @@ declare namespace wavefile {
   }
 
   type WaveFileDataChunk = {
-    /** @type {string} */
-    chunkId: 'data';
-    /** @type {number} */
+    chunkId: string;
     chunkSize: number;
-    /** @type {!Uint8Array} */
     samples: Uint8Array;
   };
 
   type WaveFileFmtChunk = {
-    /** @type {string} */
-    chunkId: 'fmt ';
-    /** @type {number} */
+    chunkId: string;
     chunkSize: number;
-    /** @type {number} */
     audioFormat: number;
-    /** @type {number} */
     numChannels: number;
-    /** @type {number} */
     sampleRate: number;
-    /** @type {number} */
     byteRate: number;
-    /** @type {number} */
     blockAlign: number;
-    /** @type {number} */
     bitsPerSample: number;
-    /** @type {number} */
     cbSize: number;
-    /** @type {number} */
     validBitsPerSample: number;
-    /** @type {number} */
     dwChannelMask: number;
-    /**
-     * 4 32-bit values representing a 128-bit ID
-     * @type {!Array<number>} 
-     */
-    subformat: readonly [number,number,number,number];
+    /** 4 32-bit values representing a 128-bit ID */
+    subformat: number[];
+    /** MPEG fields (present when audioFormat == 80) */
+    headLayer: number;
+    headBitRate: number;
+    headMode: number;
+    headModeExt: number;
+    headEmphasis: number;
+    headFlags: number;
+    ptsLow: number;
+    ptsHigh: number;
+  };
+
+  type WaveFileFactChunk = {
+    chunkId: string;
+    chunkSize: number;
+    dwSampleLength: number;
+  };
+
+  type WaveFileCuePoint = {
+    dwName: number;
+    dwPosition: number;
+    fccChunk: string;
+    dwChunkStart: number;
+    dwBlockStart: number;
+    dwSampleOffset: number;
+  };
+
+  type WaveFileCueChunk = {
+    chunkId: string;
+    chunkSize: number;
+    dwCuePoints: number;
+    points: WaveFileCuePoint[];
+  };
+
+  type WaveFileSmplLoop = {
+    dwName: number;
+    dwType: number;
+    dwStart: number;
+    dwEnd: number;
+    dwFraction: number;
+    dwPlayCount: number;
+  };
+
+  type WaveFileSmplChunk = {
+    chunkId: string;
+    chunkSize: number;
+    dwManufacturer: number;
+    dwProduct: number;
+    dwSamplePeriod: number;
+    dwMIDIUnityNote: number;
+    dwMIDIPitchFraction: number;
+    dwSMPTEFormat: number;
+    dwSMPTEOffset: number;
+    dwNumSampleLoops: number;
+    dwSamplerData: number;
+    loops: WaveFileSmplLoop[];
+  };
+
+  type WaveFileBextChunk = {
+    chunkId: string;
+    chunkSize: number;
+    description: string;
+    originator: string;
+    originatorReference: string;
+    originationDate: string;
+    originationTime: string;
+    /** 2 32-bit values, timeReference high and low */
+    timeReference: [number, number];
+    version: number;
+    UMID: string;
+    loudnessValue: number;
+    loudnessRange: number;
+    maxTruePeakLevel: number;
+    maxMomentaryLoudness: number;
+    maxShortTermLoudness: number;
+    reserved: string;
+    codingHistory: string;
+  };
+
+  type WaveFileMextChunk = {
+    chunkId: string;
+    chunkSize: number;
+    soundInformation: number;
+    frameSize: number;
+    ancillaryDataLength: number;
+    ancillaryDataDef: number;
+    reserved: string;
+  };
+
+  type WaveFileCartPostTimer = {
+    usage: string;
+    value: number;
+  };
+
+  type WaveFileCartChunk = {
+    chunkId: string;
+    chunkSize: number;
+    version: string;
+    title: string;
+    artist: string;
+    cutId: string;
+    clientId: string;
+    category: string;
+    classification: string;
+    outCue: string;
+    startDate: string;
+    startTime: string;
+    endDate: string;
+    endTime: string;
+    producerAppId: string;
+    producerAppVersion: string;
+    userDef: string;
+    levelReference: number;
+    postTimer: WaveFileCartPostTimer[];
+    reserved: string;
+    url: string;
+    tagText: string;
+  };
+
+  type WaveFileIXMLChunk = {
+    chunkId: string;
+    chunkSize: number;
+    value: string;
+  };
+
+  type WaveFileDs64Chunk = {
+    chunkId: string;
+    chunkSize: number;
+    riffSizeHigh: number;
+    riffSizeLow: number;
+    dataSizeHigh: number;
+    dataSizeLow: number;
+    originationTime: number;
+    sampleCountHigh: number;
+    sampleCountLow: number;
+  };
+
+  type WaveFileLISTChunk = {
+    chunkId: string;
+    chunkSize: number;
+    format: string;
+    subChunks: object[];
+  };
+
+  type WaveFileJunkChunk = {
+    chunkId: string;
+    chunkSize: number;
+    chunkData: number[];
+  };
+
+  type WaveFilePMXChunk = {
+    chunkId: string;
+    chunkSize: number;
+    value: string;
   };
 }
