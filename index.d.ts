@@ -250,7 +250,7 @@ declare namespace wavefile {
      * @param {number} sampleRate The target sample rate.
      * @param {Object=} options The extra configuration, if needed.
      */
-    toSampleRate(samples: number, options?: object): void;
+    toSampleRate(sampleRate: number, options?: object): void;
 
     /**
      * Encode a 16-bit wave file as 4-bit IMA ADPCM.
