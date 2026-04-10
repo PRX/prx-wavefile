@@ -90,7 +90,7 @@
     "@rollup/plugin-terser": "^1.0.0",
     "byte-data": "^19.0.1",
     "c8": "^11.0.0",
-    "docdash": "^1.1.1",
+    "docdash": "^2.0.0",
     "jsdoc": "^4.0.0",
     "jshint": "^2.10.3",
     "mocha": "^11.0.0",
