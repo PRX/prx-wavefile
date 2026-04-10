@@ -302,7 +302,7 @@ declare namespace wavefile {
      * Return a Object<tag, value> with the RIFF tags in the file.
      * @return {!Object<string, string>} The file tags.
      */
-    listTags(): object;
+    listTags(): Record<string, string>;
 
     /**
      * Remove a RIFF tag in the INFO chunk.
@@ -315,7 +315,7 @@ declare namespace wavefile {
      * Create a cue point in the wave file.
      * @param {!Object<string, *>} pointData The data of the cue point.
      */
-    setCuePoint(pointData: object): void;
+    setCuePoint(pointData: CuePointInput): void;
 
     /**
      * Remove a cue point from a wave file.
@@ -347,7 +347,7 @@ declare namespace wavefile {
      *   }
      * @return {!Array<Object>}
      */
-    listCuePoints(): Array<object>;
+    listCuePoints(): CuePointOutput[];
 
     /**
      * Update the label of a cue point.
@@ -556,5 +556,44 @@ declare namespace wavefile {
     chunkId: string;
     chunkSize: number;
     value: string;
+  };
+
+  /** Input data for creating a cue point via setCuePoint(). */
+  type CuePointInput = {
+    /** The position of the point in milliseconds (required). */
+    position: number;
+    /** A string label for the cue point. */
+    label?: string;
+    /** End position in milliseconds for regions. */
+    end?: number;
+    dwPurposeID?: number;
+    dwCountry?: number;
+    dwLanguage?: number;
+    dwDialect?: number;
+    dwCodePage?: number;
+  };
+
+  /** Output data returned by listCuePoints(). */
+  type CuePointOutput = {
+    /** The position in milliseconds. */
+    position: number;
+    /** The label text. */
+    label: string;
+    /** The end position in milliseconds, or null if not a region. */
+    end: number | null;
+    dwName: number;
+    dwPosition: number;
+    fccChunk: string;
+    dwChunkStart: number;
+    dwBlockStart: number;
+    /** The position as a sample offset. */
+    dwSampleOffset: number;
+    /** The region length as a sample count, 0 if not a region. */
+    dwSampleLength: number;
+    dwPurposeID: number;
+    dwCountry: number;
+    dwLanguage: number;
+    dwDialect: number;
+    dwCodePage: number;
   };
 }
