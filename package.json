@@ -1,6 +1,6 @@
 {
   "name": "prx-wavefile",
-  "version": "11.0.0-prx.5",
+  "version": "11.0.0-prx.6",
   "type": "module",
   "description": "Create, read and write wav files according to the specs.",
   "homepage": "https://github.com/PRX/prx-wavefile",
