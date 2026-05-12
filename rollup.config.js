@@ -27,13 +27,9 @@
  * @see https://github.com/rochars/wavefile
  */
 
-import fs from 'fs';
-import compiler from '@ampproject/rollup-plugin-closure-compiler';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-
-// Polyfills for the UMD
-const polyfills = fs.readFileSync('./scripts/polyfills.js', 'utf8');
+import terser from '@rollup/plugin-terser';
 
 export default [
   {
@@ -48,20 +44,7 @@ export default [
     plugins: [
       resolve(),
       commonjs(),
-      compiler({
-        language_in: 'ECMASCRIPT6',
-        language_out: 'ECMASCRIPT3',
-        compilation_level: 'ADVANCED',
-        warning_level: 'VERBOSE',
-        outputWrapper: polyfills + '%output%',
-        externs: ['externs/wavefile.js','externs/amd.js',]
-      }),
-      compiler({
-        language_in: 'ECMASCRIPT3',
-        language_out: 'ECMASCRIPT3',
-        compilation_level: 'WHITESPACE_ONLY',
-        warning_level: 'QUIET'
-      })
+      terser()
     ]
   }
 ];

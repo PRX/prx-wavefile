@@ -28,8 +28,8 @@
  * @see https://github.com/rochars/wavefile
  */
 
-const WaveFile = require('../dist/wavefile.js').WaveFile;
-const fs = require('fs');
+import { WaveFile } from '../dist/wrapper.mjs';
+import fs from 'fs';
 
 /** @type {string} */
 const presentation = " WaveFile 8.1.0\n" +
